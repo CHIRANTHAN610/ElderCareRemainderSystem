@@ -1,0 +1,10 @@
+package com.mycem.elderCareRemainderSystem;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.eldercare.entity.Appointment;
+
+public interface AppointmentRepository
+        extends JpaRepository<Appointment, Long> {
+
+}

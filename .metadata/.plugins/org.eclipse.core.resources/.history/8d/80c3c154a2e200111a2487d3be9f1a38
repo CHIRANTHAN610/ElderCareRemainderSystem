@@ -1,0 +1,9 @@
+package com.mycem.elderCareRemainderSystem;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.eldercare.entity.Elder;
+
+public interface ElderRepository
+        extends JpaRepository<Elder, Long> {
+
+}

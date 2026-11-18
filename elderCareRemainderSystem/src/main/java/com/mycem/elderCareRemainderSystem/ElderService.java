@@ -1,0 +1,31 @@
+package com.mycem.elderCareRemainderSystem;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class ElderService {
+
+    private final ElderRepository repository;
+
+    public ElderService(ElderRepository repository) {
+        this.repository = repository;
+    }
+
+    public Elder saveElder(Elder elder) {
+        return repository.save(elder);
+    }
+
+    public List<Elder> getAllElders() {
+        return repository.findAll();
+    }
+
+    public Elder getElderById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public void deleteElder(Long id) {
+        repository.deleteById(id);
+    }
+}

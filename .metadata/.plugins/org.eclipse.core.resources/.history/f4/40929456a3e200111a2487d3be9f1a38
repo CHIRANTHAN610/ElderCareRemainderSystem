@@ -1,0 +1,40 @@
+package com.mycem.elderCareRemainderSystem;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.*;
+
+import com.eldercare.entity.Medicine;
+import com.eldercare.service.MedicineService;
+
+@RestController
+@RequestMapping("/api/medicines")
+public class MedicineController {
+
+    private final MedicineService service;
+
+    public MedicineController(MedicineService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public Medicine addMedicine(@RequestBody Medicine medicine) {
+        return service.addMedicine(medicine);
+    }
+
+    @GetMapping
+    public List<Medicine> getAllMedicines() {
+        return service.getAllMedicines();
+    }
+
+    @GetMapping("/{id}")
+    public Medicine getMedicine(@PathVariable Long id) {
+        return service.getMedicineById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteMedicine(@PathVariable Long id) {
+        service.deleteMedicine(id);
+        return "Medicine deleted successfully";
+    }
+}

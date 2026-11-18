@@ -1,0 +1,34 @@
+package com.eldercare.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.eldercare.entity.Medicine;
+import com.eldercare.repository.MedicineRepository;
+
+@Service
+public class MedicineService {
+
+    private final MedicineRepository repository;
+
+    public MedicineService(MedicineRepository repository) {
+        this.repository = repository;
+    }
+
+    public Medicine addMedicine(Medicine medicine) {
+        return repository.save(medicine);
+    }
+
+    public List<Medicine> getAllMedicines() {
+        return repository.findAll();
+    }
+
+    public Medicine getMedicineById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public void deleteMedicine(Long id) {
+        repository.deleteById(id);
+    }
+}

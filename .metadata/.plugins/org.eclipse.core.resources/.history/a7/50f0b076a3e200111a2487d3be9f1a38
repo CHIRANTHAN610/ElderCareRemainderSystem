@@ -1,0 +1,51 @@
+package com.mycem.elderCareRemainderSystem;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.eldercare.entity.Appointment;
+import com.eldercare.repository.AppointmentRepository;
+
+@Service
+public class AppointmentService {
+
+    private final AppointmentRepository repository;
+
+    public AppointmentService(AppointmentRepository repository) {
+        this.repository = repository;
+    }
+
+    public Appointment addAppointment(Appointment appointment) {
+        return repository.save(appointment);
+    }
+
+    public List<Appointment> getAllAppointments() {
+        return repository.findAll();
+    }
+
+    public Appointment getAppointmentById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public Appointment updateAppointment(Long id, Appointment updated) {
+
+        Appointment existing = repository.findById(id).orElse(null);
+
+        if (existing == null) {
+            return null;
+        }
+
+        existing.setDoctorName(updated.getDoctorName());
+        existing.setHospitalName(updated.getHospitalName());
+        existing.setAppointmentDate(updated.getAppointmentDate());
+        existing.setAppointmentTime(updated.getAppointmentTime());
+        existing.setDescription(updated.getDescription());
+
+        return repository.save(existing);
+    }
+
+    public void deleteAppointment(Long id) {
+        repository.deleteById(id);
+    }
+}
